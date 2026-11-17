@@ -58,9 +58,8 @@ export default function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section id="topo" className="relative overflow-hidden bg-gradient-to-b from-navy via-navy to-[#0d2a50] px-6 pb-24 pt-36 text-white md:pb-32 md:pt-48">
+      <section id="topo" className="relative overflow-hidden bg-[radial-gradient(1200px_600px_at_85%_10%,#1d4b86_0%,transparent_60%),linear-gradient(var(--color-navy),var(--color-navy))] px-6 pb-24 pt-36 text-white md:pb-32 md:pt-48">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.035)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:linear-gradient(180deg,#000_30%,transparent_100%)]" />
-        <div className="absolute -right-32 top-10 h-[500px] w-[500px] rounded-full bg-brand/[.12] blur-[80px]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-14">
           <Reveal>
             <h1 className="max-w-[720px] font-display text-[clamp(2rem,4.4vw,3.2rem)] font-extrabold leading-[1.08] tracking-tight">
