@@ -12,36 +12,71 @@ visitante entre em contato ou contrate o sistema.
 
 ## Stack
 
-- **HTML, CSS e JavaScript puros:** um único arquivo `index.html`, sem framework, sem build e sem
-  dependências. Basta abrir no navegador ou publicar em qualquer hospedagem estática.
-- **Google Fonts:** títulos em **Saira** (expandida, peso 700–800) e texto corrido em **Figtree**.
-- **Ícones:** SVG inline como `<symbol>`, usados com `<use href="#i-...">`. Sem biblioteca de ícones.
-- **Responsivo:** pontos de quebra em 980 px e 720 px.
+- **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4:** um único projeto, renderizado no
+  servidor em build time.
+- **Export estático:** `output: "export"` gera HTML, CSS e JS estáticos em `dist/` (um `index.html`
+  por rota), ideal para hospedagem estática e bom para SEO. O site funciona sem servidor Node.
+- **Server Components por padrão:** `"use client"` apenas nos componentes que precisam de interação
+  (cabeçalho/menu, abas de funcionalidades, formulário e animações de scroll). Todo o conteúdo é
+  renderizado no HTML.
+- **Animações de entrada em CSS:** um `IntersectionObserver` leve apenas adiciona a classe que dispara
+  a animação (`fade-up`). Não há animação feita em JavaScript, e o conteúdo continua visível caso o JS
+  falhe (progressive enhancement via `<noscript>`).
+- **lucide-react** para ícones e **next/font** (Inter e Manrope) com `display: swap`.
 
-## Como rodar localmente
+## Pré-requisitos
 
-Basta abrir o `index.html` no navegador. Para servir via HTTP (melhor para testar fontes e CORS):
+- **Node.js 20+**
+
+## Como rodar localmente (desenvolvimento)
 
 ```bash
-npx serve . -l 3000
+npm install
+npm run dev
 ```
 
-A página abre em **http://localhost:3000**.
+A aplicação sobe em **http://localhost:3000**.
+
+## Build estático e preview de produção
+
+```bash
+npm run build
+npx serve dist -l 3005
+```
+
+O preview sobe em **http://localhost:3005**. O conteúdo de `dist/` é totalmente estático e corresponde
+ao que deve ser publicado em produção.
+
+## Scripts
+
+- `npm run dev`: ambiente de desenvolvimento (`http://localhost:3000`)
+- `npm run build`: gera o site estático em `dist/`
+- `npm run lint`: ESLint
+- `npm run format`: Prettier
 
 ## Estrutura do projeto
 
 ```
-├── index.html                       # página única
-├── README.md
-└── assets/
-    ├── css/style.css                # todos os estilos
-    ├── js/main.js                   # abas de funcionalidades + formulário
-    └── img/
-        ├── logo-gitcar.png          # logo branca (cabeçalho)
-        └── logo-gitcar-assinatura.png  # logo branca com assinatura (rodapé)
+src/
+├── app/
+│   ├── layout.tsx          # layout raiz, metadados/SEO, fontes
+│   ├── globals.css         # Tailwind v4 (@theme) e animações
+│   └── page.tsx            # home
+├── assets/brand/           # logos
+└── components/gitcar/
+    ├── SiteChrome.tsx       # cabeçalho e rodapé (client)
+    ├── Reveal.tsx           # wrapper de animação de entrada (client)
+    ├── PhoneMockup.tsx      # mock do app no celular (hero)
+    ├── FeatureTabs.tsx      # abas de funcionalidades (client)
+    └── ContactForm.tsx      # formulário de contato (client)
+public/
+├── robots.txt
+└── sitemap.xml
 ```
 
 ## SEO
 
-- Meta tags de `title` e `description` no `<head>`.
-- Tags Open Graph e favicon preparadas para descomentar quando os assets estiverem prontos.
+- `robots.txt` e `sitemap.xml` em `public/`.
+- Meta tags completas no `layout.tsx`: `title` (com template), `description`, `keywords`, Open Graph,
+  Twitter card e `canonical` por página.
+- Páginas pré-renderizadas como HTML estático.
