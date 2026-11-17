@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GitCar | Sistema de gestão e anúncios para revendas de veículos</title>
+<meta name="description" content="Avaliação, preparo, estoque, anúncios, CRM, contratos, comissões e financeiro da sua revenda em um só sistema, no celular. Planos a partir de R$ 249/mês.">
+<!-- TODO (dev): favicon e prévia de compartilhamento — ver README, seção "Pendências" -->
+<!-- <link rel="icon" href="assets/img/favicon.png"> -->
+<!-- <meta property="og:title" content="GitCar | Sistema de gestão e anúncios para revendas de veículos"> -->
+<!-- <meta property="og:description" content="Avaliação, preparo, estoque, anúncios, CRM, contratos, comissões e financeiro da sua revenda em um só sistema, no celular."> -->
+<!-- <meta property="og:image" content="https://SEU-DOMINIO/assets/img/og-gitcar.png"> -->
+<!-- <meta property="og:url" content="https://SEU-DOMINIO/"> -->
+<!-- TODO (dev): scripts de medição (Google Analytics / Meta Pixel) entram aqui -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@100..125,500..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- Ícones reutilizáveis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 12h12"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6l6 6-6 6"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 15v-3l2.2-4.6A2 2 0 0 1 7 6.2h10a2 2 0 0 1 1.8 1.2L21 12v3a1 1 0 0 1-1 1h-1.5M3 15a1 1 0 0 0 1 1h1.5M8.5 16h7"/><circle cx="7" cy="16.3" r="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="16.3" r="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 12h16"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M15 15l5 5"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M14.5 4.5a4.5 4.5 0 0 0-5.6 5.8L4 15.2 6.8 18l4.9-4.9a4.5 4.5 0 0 0 5.8-5.6l-2.7 2.7-2.4-.6-.6-2.4z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M4 7.5L12 4l8 3.5v9L12 20l-8-3.5z M4 7.5L12 11l8-3.5 M12 11v9"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M4 10v4h3l8 4V6L7 10zM18 9.5a3.5 3.5 0 0 1 0 5M7 14l1 5h2.5l-1-4.4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.9"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14.3A5.5 5.5 0 0 1 20.5 19"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M6 3.5h8l4 4V20.5H6z M14 3.5v4h4 M9 12h6M9 15.5h6"/></symbol>
+  <symbol id="i-pct" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M18 6L6 18"/><circle cx="7.5" cy="7.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="16.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M10.5 18h3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M4 11l8-6.5 8 6.5V20h-5v-5.5H9V20H4z"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M3.5 12.5V4h8.5l8.5 8.5-8.5 8.5z"/><circle cx="8" cy="8.5" r="1.4" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+ <div class="wrap">
+  <header>
+   <a class="logo" href="#topo" aria-label="GitCar"><img src="assets/img/logo-gitcar.png" alt="GitCar" width="700" height="111"></a>
+   <nav aria-label="Principal">
+    <a class="h" href="#jornada">Funcionalidades</a>
+    <a class="h" href="#planos">Planos</a>
+    <a class="h" href="#duvidas">Dúvidas</a>
+    <a class="h" href="#contato">Fale conosco</a>
+    <a class="btn sm" href="#comecar">Teste grátis</a>
+   </nav>
+  </header>
+
+  <div class="hero-grid" id="topo">
+   <div>
+    <span class="eyebrow">Sistema para revendas de veículos</span>
+    <h1>Da avaliação à venda, sua revenda inteira <em>no celular</em>.</h1>
+    <p class="lead">Estoque, preparo, anúncios, clientes, contratos, comissões e financeiro em um só sistema. Saiba quanto cada carro custou, em que etapa ele está e quanto você tem a receber, de onde estiver.</p>
+    <div class="cta-row">
+     <a class="btn" href="#comecar">Começar teste grátis <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+     <a class="btn ghost" href="#jornada">Ver como funciona</a>
+    </div>
+    <div class="meta">
+     <span><svg aria-hidden="true"><use href="#i-check"/></svg>Planos a partir de R$ 249/mês</span>
+     <span><svg aria-hidden="true"><use href="#i-check"/></svg>Para revendas de todos os tamanhos</span>
+    </div>
+   </div>
+
+   <div class="stage" aria-hidden="true">
+    <div class="phone">
+     <div class="notch"></div>
+     <div class="top"><strong>Estoque</strong><span>18 veículos</span></div>
+     <div class="chips"><i class="on">Todos</i><i>Prontos</i><i>Em preparo</i></div>
+     <div class="car"><div class="ph"><svg><use href="#i-car"/></svg></div><div class="info"><b>Corolla XEi 2021</b><span>R$ 119.900 · 12 dias</span></div><span class="tag t-ok">Pronto</span></div>
+     <div class="car"><div class="ph"><svg><use href="#i-car"/></svg></div><div class="info"><b>Onix LT 2020</b><span>R$ 62.500 · 4 dias</span></div><span class="tag t-wip">Em preparo</span></div>
+     <div class="car"><div class="ph"><svg><use href="#i-car"/></svg></div><div class="info"><b>Compass Longitude 2019</b><span>R$ 98.000 · hoje</span></div><span class="tag t-ev">Avaliação</span></div>
+     <div class="car"><div class="ph"><svg><use href="#i-car"/></svg></div><div class="info"><b>HB20 Comfort 2022</b><span>R$ 74.900 · 21 dias</span></div><span class="tag t-ok">Pronto</span></div>
+     <div class="sum"><div><strong>R$ 41 mil</strong>a receber</div><div><strong>7</strong>negociações</div></div>
+     <div class="bar"><svg class="on"><use href="#i-home"/></svg><svg><use href="#i-box"/></svg><svg><use href="#i-users"/></svg><svg><use href="#i-chart"/></svg></div>
+    </div>
+    <div class="toast a"><div class="ic"><svg><use href="#i-doc"/></svg></div><div><b>Contrato pronto</b><span>Corolla XEi · dados preenchidos</span></div></div>
+    <div class="toast b"><div class="ic"><svg><use href="#i-users"/></svg></div><div><b>Novo interessado</b><span>Onix LT · aguardando retorno</span></div></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ ANTES x DEPOIS ============ -->
+<section id="vantagens">
+ <div class="wrap">
+  <div class="sec-h">
+   <span class="eyebrow">Por que GitCar</span>
+   <h2>Menos planilha. Mais carro vendido.</h2>
+   <p>A rotina de uma revenda está espalhada em cadernos, planilhas, portais e grupos de mensagem. O GitCar junta tudo e tira o trabalho repetido do caminho.</p>
+  </div>
+  <div class="swap">
+   <div class="row">
+    <div class="before"><b>Hoje</b>Avaliação “de cabeça”, sem saber se a margem fecha.</div>
+    <div class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
+    <div class="after"><b>Com GitCar</b>Avaliação padronizada, com custos previstos antes de fechar a compra.</div>
+   </div>
+   <div class="row">
+    <div class="before"><b>Hoje</b>O mesmo carro cadastrado à mão em cada portal.</div>
+    <div class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
+    <div class="after"><b>Com GitCar</b>Cadastre uma vez e gerencie os anúncios de um só lugar.</div>
+   </div>
+   <div class="row">
+    <div class="before"><b>Hoje</b>Interessado anotado no papel, que ninguém retorna.</div>
+    <div class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
+    <div class="after"><b>Com GitCar</b>Cada cliente com histórico, etapa e próxima ação à vista.</div>
+   </div>
+   <div class="row">
+    <div class="before"><b>Hoje</b>Contrato digitado de novo a cada venda; comissão conferida na calculadora.</div>
+    <div class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
+    <div class="after"><b>Com GitCar</b>Contrato preenchido com os dados da venda e comissão calculada pelas suas regras.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ JORNADA / FUNCIONALIDADES ============ -->
+<section class="feat" id="jornada">
+ <div class="wrap">
+  <div class="sec-h">
+   <span class="eyebrow">Funcionalidades</span>
+   <h2>Acompanhe cada carro do começo ao fim.</h2>
+   <p>Da avaliação ao dinheiro no caixa, cada etapa tem o seu lugar no GitCar. Toque em uma etapa para ver como ela funciona.</p>
+  </div>
+
+  <div class="track" role="tablist" aria-label="Etapas da jornada do veículo">
+   <button role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="dot"><svg aria-hidden="true"><use href="#i-search"/></svg></span>Avaliação</button>
+   <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-wrench"/></svg></span>Preparo</button>
+   <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-box"/></svg></span>Estoque</button>
+   <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-mega"/></svg></span>Anúncios</button>
+   <button role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-users"/></svg></span>Clientes</button>
+   <button role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-doc"/></svg></span>Contrato</button>
+   <button role="tab" id="t7" aria-controls="p7" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-pct"/></svg></span>Comissão</button>
+   <button role="tab" id="t8" aria-controls="p8" aria-selected="false" tabindex="-1"><span class="dot"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>Financeiro</button>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+   <div><div class="step">Etapa 1 · Avaliação de veículos</div><h3>Compre sabendo quanto o carro vai render.</h3>
+    <p>Registre condições, características e custos previstos de cada veículo que chega. Com avaliações no mesmo padrão, sua equipe compara oportunidades antes de fechar negócio e protege a margem.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Avaliações padronizadas para toda a equipe</li><li><svg><use href="#i-check"/></svg>Custos previstos e potencial de revenda lado a lado</li><li><svg><use href="#i-check"/></svg>Mais argumentos na hora de negociar a compra</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+   <div><div class="step">Etapa 2 · Controle de serviços</div><h3>Carro parado no pátio é dinheiro parado.</h3>
+    <p>Organize manutenção, reparos e preparação de cada veículo em um fluxo que mostra o que já foi feito e o que falta. Menos esquecimento, menos atraso e menos tempo até o carro ir à venda.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Serviços e pendências organizados por veículo</li><li><svg><use href="#i-check"/></svg>Custo de preparação somado ao custo do carro</li><li><svg><use href="#i-check"/></svg>Tempo até o veículo ficar pronto sempre à vista</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+   <div><div class="step">Etapa 3 · Controle de estoque</div><h3>Todo o pátio em uma tela.</h3>
+    <p>Centralize as informações de todos os veículos e deixe de depender de planilhas e controles separados. Qualquer pessoa da equipe sabe o que está disponível, em que situação e com qual histórico.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Situação de cada veículo: em avaliação, em preparo ou pronto</li><li><svg><use href="#i-check"/></svg>Entrada, permanência e saída registradas</li><li><svg><use href="#i-check"/></svg>Histórico completo de cada carro</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+   <div><div class="step">Etapa 4 · Integrador de anúncios <span class="pill">Planos Pro e Premium</span></div><h3>Cadastre uma vez. Anuncie em vários portais.</h3>
+    <p>Gerencie os anúncios de forma centralizada e pare de cadastrar e atualizar o mesmo carro em cada site. Vendeu? Atualize em um lugar só. Sua equipe gasta menos tempo digitando e mais tempo atendendo.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Divulgação do estoque em vários canais</li><li><svg><use href="#i-check"/></svg>Menos cadastro manual repetido</li><li><svg><use href="#i-check"/></svg>Informações dos anúncios organizadas em um só lugar</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+   <div><div class="step">Etapa 5 · CRM</div><h3>Nenhum interessado esquecido.</h3>
+    <p>Centralize clientes e interessados, registre cada contato e veja em que etapa está cada negociação. Mesmo quando mais de um vendedor atende, a conversa continua de onde parou.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Clientes e interessados em uma base única</li><li><svg><use href="#i-check"/></svg>Negociações organizadas por etapa</li><li><svg><use href="#i-check"/></svg>Próximas ações sempre visíveis</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+   <div><div class="step">Etapa 6 · Contratos automáticos</div><h3>Fechou negócio? O contrato já está preenchido.</h3>
+    <p>Os dados que já estão no sistema preenchem os seus modelos de contrato. Menos digitação, menos risco de divergência entre a negociação e o documento, e mais tempo com o cliente.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Seus modelos, preenchidos com os dados da venda</li><li><svg><use href="#i-check"/></svg>Documentos padronizados</li><li><svg><use href="#i-check"/></svg>Registro organizado de cada negociação</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p7" aria-labelledby="t7" hidden>
+   <div><div class="step">Etapa 7 · Comissão de vendedores</div><h3>Comissão clara, sem conferência na calculadora.</h3>
+    <p>Configure as regras de comissão da sua revenda e acompanhe o resultado de cada vendedor. O sistema faz a apuração com base nas vendas registradas, e todo mundo sabe quanto tem a receber.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Regras de comissão configuradas por você</li><li><svg><use href="#i-check"/></svg>Resultado individual de cada vendedor</li><li><svg><use href="#i-check"/></svg>Menos conferência manual no fim do mês</li></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="p8" aria-labelledby="t8" hidden>
+   <div><div class="step">Etapa 8 · Gestão financeira</div><h3>Os números de cada negócio, sem planilha paralela.</h3>
+    <p>Reúna receitas, despesas e compromissos em um só lugar. Acompanhe contas a pagar e a receber, planeje o caixa e decida com base em informação organizada.</p></div>
+   <ul><li><svg><use href="#i-check"/></svg>Contas a pagar e a receber</li><li><svg><use href="#i-check"/></svg>Fluxo de caixa sempre visível</li><li><svg><use href="#i-check"/></svg>Base para decidir sobre custos, compras e investimentos</li></ul>
+  </div>
+ </div>
+</section>
+
+<!-- ============ MOBILIDADE ============ -->
+<section id="mobilidade">
+ <div class="wrap">
+  <div class="sec-h">
+   <span class="eyebrow">No celular</span>
+   <h2>Gerir a revenda não precisa prender você na loja.</h2>
+   <p>As informações que importam ficam no seu bolso, na hora em que você precisa decidir.</p>
+  </div>
+  <div class="mob">
+   <div><div class="ic"><svg aria-hidden="true"><use href="#i-tag"/></svg></div><h3>Negocie com os números na mão</h3><p>Na frente do cliente ou do vendedor do carro, consulte custo, preço e situação na hora.</p></div>
+   <div><div class="ic"><svg aria-hidden="true"><use href="#i-pin"/></svg></div><h3>Fora da loja, no controle</h3><p>Em uma reunião, no leilão ou viajando, acompanhe estoque, vendas e caixa de onde estiver.</p></div>
+   <div><div class="ic"><svg aria-hidden="true"><use href="#i-bolt"/></svg></div><h3>Sem esperar o computador ligar</h3><p>O que é importante abre no celular, em segundos, sem depender de uma mesa.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ PASSOS ============ -->
+<section class="steps-sec">
+ <div class="wrap">
+  <div class="sec-h">
+   <span class="eyebrow">Como começar</span>
+   <h2>Sua revenda no GitCar em três passos.</h2>
+   <p>Você testa com os seus próprios carros, na sua rotina, antes de decidir.</p>
+  </div>
+  <div class="steps">
+   <div><h3>Crie sua conta</h3><p>Escolha o plano que cabe no tamanho do seu estoque e comece o teste grátis.</p></div>
+   <div><h3>Cadastre os primeiros veículos</h3><p>Coloque no sistema os carros que estão no pátio hoje e convide sua equipe.</p></div>
+   <div><h3>Veja a operação funcionando</h3><p>Acompanhe estoque, clientes e caixa pelo celular e sinta a diferença no dia a dia.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ PLANOS ============ -->
+<section id="planos">
+ <div class="wrap">
+  <div class="sec-h center">
+   <span class="eyebrow">Planos</span>
+   <h2>Um plano para cada tamanho de estoque.</h2>
+   <p>Todos os planos incluem a gestão completa da revenda. Comece pelo que cabe hoje e mude quando crescer.</p>
+  </div>
+  <div class="plans">
+   <div class="plan">
+    <h3>GitCar Start</h3><div class="cap">Até 25 veículos</div>
+    <div class="price">R$ 249<span>/mês</span></div>
+    <p class="who">Para revendas menores que querem sair da planilha e organizar a operação.</p>
+    <ul>
+     <li><svg><use href="#i-check"/></svg>Controle de estoque</li>
+     <li><svg><use href="#i-check"/></svg>Avaliação de veículos</li>
+     <li><svg><use href="#i-check"/></svg>Controle de serviços</li>
+     <li><svg><use href="#i-check"/></svg>CRM</li>
+     <li><svg><use href="#i-check"/></svg>Contratos automáticos</li>
+     <li><svg><use href="#i-check"/></svg>Comissões</li>
+     <li><svg><use href="#i-check"/></svg>Gestão financeira</li>
+     <li><svg><use href="#i-check"/></svg>Acesso pelo celular</li>
+     <li class="no"><svg><use href="#i-minus"/></svg>Integrador de anúncios</li>
+    </ul>
+    <a class="btn line" href="#comecar">Testar o Start</a>
+   </div>
+   <div class="plan hot">
+    <span class="badge">Recomendado para quem anuncia</span>
+    <h3>GitCar Pro</h3><div class="cap">Até 50 veículos</div>
+    <div class="price">R$ 449<span>/mês</span></div>
+    <p class="who">Para quem quer a gestão completa e anunciar em vários portais sem retrabalho.</p>
+    <ul>
+     <li class="lead"><svg><use href="#i-check"/></svg>Tudo do Start, mais:</li>
+     <li><svg><use href="#i-check"/></svg>Integrador de anúncios</li>
+     <li><svg><use href="#i-check"/></svg>Divulgação do estoque centralizada</li>
+     <li><svg><use href="#i-check"/></svg>Capacidade para até 50 veículos</li>
+    </ul>
+    <a class="btn" href="#comecar">Testar o Pro</a>
+   </div>
+   <div class="plan">
+    <h3>GitCar Premium</h3><div class="cap">Mais de 50 veículos</div>
+    <div class="price">R$ 649<span>/mês</span></div>
+    <p class="who">Para estoques grandes e operações com várias pessoas envolvidas.</p>
+    <ul>
+     <li class="lead"><svg><use href="#i-check"/></svg>Tudo do Pro, mais:</li>
+     <li><svg><use href="#i-check"/></svg>Capacidade para mais de 50 veículos</li>
+     <li><svg><use href="#i-check"/></svg>Relatórios gerenciais ampliados</li>
+    </ul>
+    <a class="btn line" href="#comecar">Testar o Premium</a>
+   </div>
+  </div>
+  <p class="plans-note">Ficou em dúvida sobre o plano certo? <a href="#contato">Fale com nosso time</a> e a gente ajuda você a escolher.</p>
+ </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="duvidas" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h center">
+   <span class="eyebrow">Dúvidas</span>
+   <h2>Perguntas frequentes</h2>
+  </div>
+  <div class="faq">
+   <details><summary>Dá para usar o GitCar pelo celular?</summary><p>Sim. O acesso pelo celular está incluído em todos os planos, para você acompanhar estoque, clientes e financeiro de onde estiver.</p></details>
+   <details><summary>Posso mudar de plano depois?</summary><p>Pode. Comece pelo plano que cabe no seu estoque hoje e mude quando a revenda crescer.</p></details>
+   <details><summary>Em quais portais o integrador publica os anúncios?</summary><p>Os portais disponíveis dependem das integrações ativas no GitCar. <a href="#contato">Fale com a gente</a> para conferir os canais que você usa. O integrador está disponível nos planos Pro e Premium.</p></details>
+   <details><summary>Os contratos já saem prontos para assinar?</summary><p>O GitCar preenche os seus modelos de contrato com os dados cadastrados na venda. A geração depende dos modelos e campos configurados, e recomendamos sempre revisar o documento antes da assinatura.</p></details>
+   <details><summary>Como as comissões são calculadas?</summary><p>Pelas regras de comissão que você configura para a sua revenda, com base nas vendas registradas no sistema.</p></details>
+  </div>
+ </div>
+</section>
+
+<!-- ============ FALE CONOSCO ============ -->
+<section class="contact" id="contato">
+ <div class="wrap cgrid">
+  <div>
+   <div class="sec-h">
+    <span class="eyebrow">Fale conosco</span>
+    <h2>Prefere conversar antes de testar?</h2>
+    <p>Deixe seus dados e nosso time entra em contato para entender a sua revenda e tirar suas dúvidas.</p>
+   </div>
+   <ul class="perks">
+    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Descubra qual plano combina com o tamanho do seu estoque</li>
+    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Confira se o integrador atende aos portais que você usa</li>
+    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tire dúvidas sobre funcionalidades, contratos e comissões</li>
+    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tenha ajuda para dar os primeiros passos no GitCar</li>
+   </ul>
+  </div>
+
+  <div class="form-card">
+   <form id="contactForm" novalidate>
+    <h3>Peça um contato</h3>
+    <p class="hint">Leva menos de um minuto. Campos com * são obrigatórios.</p>
+    <div class="fgrid2">
+     <div class="field"><label for="f-nome">Seu nome *</label><input id="f-nome" name="nome" autocomplete="name" required><span class="msg">Informe seu nome.</span></div>
+     <div class="field"><label for="f-tel">WhatsApp / telefone *</label><input id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 90000-0000" required><span class="msg">Informe um telefone com DDD.</span></div>
+     <div class="field"><label for="f-email">E-mail <span class="opt">(opcional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"><span class="msg">Confira o e-mail.</span></div>
+     <div class="field"><label for="f-revenda">Nome da revenda *</label><input id="f-revenda" name="revenda" autocomplete="organization" required><span class="msg">Informe o nome da revenda.</span></div>
+     <div class="field"><label for="f-cidade">Cidade / UF <span class="opt">(opcional)</span></label><input id="f-cidade" name="cidade" autocomplete="address-level2" placeholder="Fortaleza / CE"></div>
+     <div class="field"><label for="f-estoque">Veículos em estoque *</label>
+      <select id="f-estoque" name="estoque" required>
+       <option value="">Selecione</option><option>Até 25</option><option>De 26 a 50</option><option>Mais de 50</option>
+      </select><span class="msg">Escolha uma opção.</span></div>
+     <fieldset class="field full"><legend>Como prefere ser contatado?</legend>
+      <div class="radios">
+       <label><input type="radio" name="canal" value="WhatsApp" checked>WhatsApp</label>
+       <label><input type="radio" name="canal" value="Ligação">Ligação</label>
+       <label><input type="radio" name="canal" value="E-mail">E-mail</label>
+      </div><span class="msg" id="canal-msg">Para contato por e-mail, preencha o campo de e-mail.</span>
+     </fieldset>
+     <div class="field full"><label for="f-msg">Quer adiantar algo? <span class="opt">(opcional)</span></label><textarea id="f-msg" name="mensagem" placeholder="Ex.: quero saber se o integrador publica nos portais que uso."></textarea></div>
+    </div>
+    <div class="hp" aria-hidden="true"><label>Não preencha<input name="site" tabindex="-1" autocomplete="off"></label></div>
+    <button class="btn" type="submit">Quero que entrem em contato <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="form-error" id="formError" role="alert">Não conseguimos enviar agora. Tente de novo em alguns instantes.</div>
+    <p class="legal">Usamos seus dados apenas para entrar em contato sobre o GitCar.</p>
+   </form>
+   <div class="done" id="formDone" hidden>
+    <div class="ok"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+    <h3>Recebemos seus dados!</h3>
+    <p id="doneText">Nosso time vai falar com você em breve.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<div class="final" id="comecar">
+ <div class="wrap">
+  <h2>Comece hoje a gerir sua revenda de um jeito mais simples.</h2>
+  <p>Crie sua conta, cadastre os primeiros veículos e veja o GitCar funcionando na sua operação.</p>
+  <div class="cta-row">
+   <!-- TODO: trocar "#" pelo link real de cadastro -->
+   <a class="btn" href="#">Criar conta e testar grátis <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+   <a class="btn ghost" href="#contato">Falar com nosso time</a>
+  </div>
+ </div>
+</div>
+
+<footer>
+ <div class="wrap">
+  <div class="fcols">
+   <div><img class="flogo" src="assets/img/logo-gitcar-assinatura.png" alt="GitCar: um sistema para gestão e anúncios da sua loja" width="700" height="161" loading="lazy"><p style="max-width:26em">Sistema de gestão e anúncios para revendas de veículos.</p></div>
+   <div class="links"><a href="#jornada">Funcionalidades</a><a href="#planos">Planos</a><a href="#duvidas">Dúvidas</a><a href="#contato">Fale conosco</a><a href="https://www.instagram.com/gitcar.com.br/" target="_blank" rel="noopener">Instagram</a><a href="https://youtube.com/@gitcar-b4g" target="_blank" rel="noopener">YouTube</a></div>
+  </div>
+  <div class="copy"><span>© 2026 GitCar. Todos os direitos reservados.</span><span>Um produto <b>Zarys</b></span></div>
+ </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
