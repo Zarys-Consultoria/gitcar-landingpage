@@ -238,10 +238,10 @@ export default function Home() {
                       ))}
                     </ul>
                     <a
-                      href="#comecar"
+                      href="#contato"
                       className={`mt-7 flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 md:mt-8 md:py-3.5 ${isPro ? "bg-amber text-ink hover:shadow-lg hover:shadow-amber/20" : "bg-ice text-brand hover:bg-brand/10"}`}
                     >
-                      Testar o {plan.name.split(" ")[1]}
+                      Falar com um especialista
                     </a>
                   </div>
                 </Reveal>
