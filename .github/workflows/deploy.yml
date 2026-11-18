@@ -25,8 +25,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx next build
-        env:
-          PAGES_BASE_PATH: /gitcar-landingpage
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
