@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 interface RevealProps {
   children: ReactNode;
@@ -12,9 +14,10 @@ interface RevealProps {
 export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
+    el.classList.add("reveal");
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -31,7 +34,7 @@ export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }:
   }, []);
 
   return (
-    <Tag ref={ref as never} className={`reveal ${className}`} style={{ animationDelay: `${delay}ms` }}>
+    <Tag ref={ref as never} className={className} style={{ animationDelay: `${delay}ms` }}>
       {children}
     </Tag>
   );

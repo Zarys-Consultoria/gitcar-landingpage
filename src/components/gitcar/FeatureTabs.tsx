@@ -101,9 +101,10 @@ export function FeatureTabs() {
 
   return (
     <>
-      <div className="relative mb-10 overflow-x-auto" role="tablist" aria-label="Etapas da jornada do veículo">
-        <div className="absolute left-[6%] right-[6%] top-7 h-0.5 bg-line" />
-        <div className="grid min-w-[720px] grid-cols-8">
+      <div className="mb-10 overflow-x-auto" role="tablist" aria-label="Etapas da jornada do veículo">
+        <div className="relative min-w-[720px]">
+          <div className="absolute left-[6%] right-[6%] top-7 h-0.5 bg-line" />
+          <div className="grid grid-cols-8">
           {steps.map((step, i) => {
             const isActive = i === active;
             return (
@@ -126,6 +127,7 @@ export function FeatureTabs() {
               </button>
             );
           })}
+          </div>
         </div>
       </div>
 

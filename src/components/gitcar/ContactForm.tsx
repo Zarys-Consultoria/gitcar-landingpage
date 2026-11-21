@@ -110,11 +110,11 @@ export function ContactForm() {
 
         <fieldset className="sm:col-span-2">
           <legend className="mb-2 text-sm font-semibold">Como prefere ser contatado?</legend>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-3 gap-2">
             {["WhatsApp", "Ligação", "E-mail"].map((opt) => (
-              <label key={opt} className={`inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${canal === opt ? "border-brand bg-brand/5 text-brand" : "border-line text-muted hover:border-brand/30"}`}>
+              <label key={opt} className={`flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border px-1.5 py-2 text-xs font-medium transition sm:gap-2 sm:px-4 sm:text-sm ${canal === opt ? "border-brand bg-brand/5 text-brand" : "border-line text-muted hover:border-brand/30"}`}>
                 <input type="radio" name="canal" value={opt} checked={canal === opt} onChange={() => setCanal(opt)} className="sr-only" />
-                <span className={`h-3.5 w-3.5 rounded-full border-2 ${canal === opt ? "border-brand bg-brand" : "border-line"}`} />
+                <span className={`h-3 w-3 shrink-0 rounded-full border-2 sm:h-3.5 sm:w-3.5 ${canal === opt ? "border-brand bg-brand" : "border-line"}`} />
                 {opt}
               </label>
             ))}

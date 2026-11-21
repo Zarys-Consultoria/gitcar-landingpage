@@ -46,7 +46,7 @@ const plans = [
 ];
 
 const faqs = [
-  { q: "Dá para usar o GitCar pelo celular?", a: "Sim. O acesso pelo celular está incluído em todos os planos, para você acompanhar estoque, clientes e financeiro de onde estiver." },
+  { q: "Consigo usar o GitCar pelo celular?", a: "Sim. O acesso pelo celular está incluído em todos os planos, para você acompanhar estoque, clientes e financeiro de onde estiver." },
   { q: "Posso mudar de plano depois?", a: "Pode. Comece pelo plano que cabe no seu estoque hoje e mude quando a revenda crescer." },
   { q: "Em quais portais o integrador publica os anúncios?", a: "Os portais disponíveis dependem das integrações ativas no GitCar. Entre em contato para conferir os canais que você usa. O integrador está disponível nos planos Pro e Premium." },
   { q: "Os contratos já saem prontos para assinar?", a: "O GitCar preenche os seus modelos de contrato com os dados cadastrados na venda. A geração depende dos modelos e campos configurados, e recomendamos sempre revisar o documento antes da assinatura." },

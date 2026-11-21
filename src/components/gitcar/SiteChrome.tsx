@@ -173,8 +173,8 @@ export function SiteFooter() {
       <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 md:mt-14 md:pt-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1 text-xs text-white/60">
-            <p>© {new Date().getFullYear()} Zarys Consultoria Ltda · CNPJ 64.817.120/0001-69</p>
-            <p>R. Pais Leme, 215, conj. 1713, Pinheiros, São Paulo/SP, CEP 05424-150</p>
+            <p>© {new Date().getFullYear()} Zarys Consultoria Ltda · <span className="whitespace-nowrap">CNPJ 64.817.120/0001-69</span></p>
+            <p>R. Pais Leme, 215, conj. 1713, Pinheiros, São Paulo/SP, <span className="whitespace-nowrap">CEP 05424-150</span></p>
           </div>
           <div className="flex gap-4 text-xs text-white/60">
             <a href="#" className="transition-colors hover:text-amber">Política de Privacidade</a>
